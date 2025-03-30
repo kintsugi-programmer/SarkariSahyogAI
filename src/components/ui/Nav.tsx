@@ -61,21 +61,21 @@ const NavLeft = ({
       >
         <FiMenu />
       </motion.button>
-      <Logo /> 
+      {/* <Logo />  */}
       <h1 className="max-w-4xl text-center font-black text-[#155e75] leading-[1.15] text-2xl md:leading-[1.15]">
       SarkariSahyogAI
       </h1>
-      <NavLink text="About Us" />
-      <NavLink text="Features" />
-      <NavLink text="Guide" />
+      <NavLink text="About Us" link="/" />
+      <NavLink text="Features" link="#features"/>
+      <NavLink text="Guide" link="#steps"/>
     </div>
   );
 };
 
-const NavLink = ({ text }: { text: string }) => {
+const NavLink = ({ text,link }: { text: string,link: string }) => {
   return (
     <a
-      href="#"
+      href={link}
       rel="nofollow"
       className="hidden lg:block h-[30px] overflow-hidden font-medium"
     >
@@ -92,13 +92,14 @@ const NavLink = ({ text }: { text: string }) => {
 const NavRight = () => {
   return (
     <div className="flex items-center gap-4">
+      <a href="#foot">
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="px-4 py-2 bg-[#155e75] bg-clip-text text-transparent font-medium rounded-md whitespace-nowrap"
       >
         Reach Out
-      </motion.button>
+      </motion.button></a>
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
@@ -118,20 +119,20 @@ const NavMenu = ({ isOpen }: { isOpen: boolean }) => {
       animate={isOpen ? "open" : "closed"}
       className="absolute p-4 bg-white shadow-lg left-0 right-0 top-full origin-top flex flex-col gap-4"
     >
-      <MenuLink text="Solutions" />
-      <MenuLink text="Community" />
-      <MenuLink text="Pricing" />
-      <MenuLink text="Company" />
+            <MenuLink text="About Us" link="/" />
+      <MenuLink text="Features" link="#features"/>
+      <MenuLink text="Guide" link="#steps"/>
+
     </motion.div>
   );
 };
 
-const MenuLink = ({ text }: { text: string }) => {
+const MenuLink = ({ text,link }: { text: string,link : string }) => {
   return (
     <motion.a
       variants={menuLinkVariants}
       rel="nofollow"
-      href="#"
+      href={link}
       className="h-[30px] overflow-hidden font-medium text-lg flex items-start gap-2"
     >
       <motion.span variants={menuLinkArrowVariants}>
