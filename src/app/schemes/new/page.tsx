@@ -10,6 +10,14 @@ import { Card, CardContent } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
 
 export default function NewSchemeForm() {
   const router = useRouter();
@@ -114,16 +122,16 @@ export default function NewSchemeForm() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 sm:p-6 md:p-8">
-      <Card className="shadow-xl rounded-2xl">
-        <CardContent className="p-6">
+    <div className="max-w-4xl  mx-auto p-4 sm:p-6 md:p-8  pt-[50vh] ">
+      <Card className="shadow-xl rounded-xl ">
+        <CardContent className="p-6 ">
           <h2 className="text-2xl font-semibold mb-6 text-center">Post a New Scheme</h2>
           <ScrollArea className="h-[75vh] pr-4">
             <form onSubmit={handleSubmit} className="space-y-4">
               {textFields.map(({ name, label }) => (
                 <div key={name}>
                   <Label htmlFor={name}>{label}</Label>
-                  <Textarea id={name} name={name} onChange={handleChange} />
+                  <Textarea id={name} name={name} onChange={handleChange}  />
                 </div>
               ))}
 
@@ -133,7 +141,7 @@ export default function NewSchemeForm() {
                   <select
                     id={key}
                     name={key}
-                    className="w-full border rounded p-2"
+                    className="w-full border rounded  p-2"
                     onChange={handleChange}
                     value={form[key as keyof typeof form]}
                   >
@@ -144,7 +152,8 @@ export default function NewSchemeForm() {
                 </div>
               ))}
 
-              <Button type="submit" className="w-full mt-4" disabled={loading}>
+
+              <Button type="submit" className="w-full rounded-lg bg-[#155e75] p-3 uppercase text-white transition-colors hover:bg-cyan-950 " disabled={loading}>
                 {loading ? 'Posting...' : 'Submit Scheme'}
               </Button>
             </form>

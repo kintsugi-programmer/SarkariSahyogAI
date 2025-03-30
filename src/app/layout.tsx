@@ -34,7 +34,9 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-          <div className='w-full fixed left-0 z-50'>      <Nav/></div>
+         
+                <Nav/>
+                
         {children}
         </ThemeProvider>
       </body>

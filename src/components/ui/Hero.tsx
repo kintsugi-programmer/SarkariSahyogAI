@@ -29,7 +29,7 @@ import {
   FaFemale,
 } from "react-icons/fa";
 import { IconType } from "react-icons";
-
+import Link from "next/link";
 export const Hero = () => {
   return (
     <section className="pb-5 bg-white">
@@ -69,8 +69,8 @@ const Copy = () => {
           rel="nofollow"
           className="flex origin-top-left items-center rounded-full border border-zinc-900 bg-white p-0.5 text-sm transition-transform hover:-rotate-2"
         >
-          <span className="rounded-full bg-[#FF6154] px-2 py-0.5 font-medium text-white">
-            ALSO!
+          <span className="rounded-full bg-orange-300 px-2 py-0.5 font-medium text-white">
+            AND!
           </span>
           <span className="ml-1.5 mr-1 inline-block">
             We're are Opensource!
@@ -85,9 +85,10 @@ const Copy = () => {
       <p className="mx-auto my-4 max-w-3xl text-center text-base leading-relaxed md:my-6 md:text-xl md:leading-relaxed">
       Quickly find verified government schemes you're eligible for with our intuitive Eligibility Checker & Real-time Guiding Chatbot. Say goodbye to confusion and misinformation.
       </p>
-      <button className="rounded-lg bg-[#155e75] p-3 uppercase text-white transition-colors hover:bg-indigo-700">
+      <Link href='/schemes/new'>
+      <button className="rounded-lg bg-[#155e75] p-3 uppercase text-white transition-colors hover:bg-cyan-950">
         <span className="font-bold">Get started - </span> NO SIGN-UP REQUIRED
-      </button>
+      </button></Link>
     </>
   );
 };
