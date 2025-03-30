@@ -5,7 +5,7 @@ import { FiMenu, FiArrowRight } from "react-icons/fi";
 
 const Nav = () => {
   return (
-    <div className="bg-[#155e75]">
+    <div className="bg-[#155e75] z-999">
       <FlipNav />
       
     </div>
@@ -62,8 +62,10 @@ const NavLeft = ({
         <FiMenu />
       </motion.button>
       {/* <Logo />  */}
-      <h1 className="max-w-4xl text-center font-black text-[#155e75] leading-[1.15] text-2xl md:leading-[1.15]">
+      <h1 className="max-w-4xl sm:block hidden text-center font-black text-[#155e75] leading-[1.15] text-2xl md:leading-[1.15]">
       SarkariSahyogAI
+      </h1>      <h1 className="max-w-4xl block sm:hidden text-center font-black text-[#155e75] leading-[1.15] text-2xl md:leading-[1.15]">
+      SSAI
       </h1>
       <NavLink text="About Us" link="/" />
       <NavLink text="Features" link="#features"/>
@@ -117,7 +119,7 @@ const NavMenu = ({ isOpen }: { isOpen: boolean }) => {
       variants={menuVariants}
       initial="closed"
       animate={isOpen ? "open" : "closed"}
-      className="absolute p-4 bg-white shadow-lg left-0 right-0 top-full origin-top flex flex-col gap-4"
+      className="absolute p-4 bg-white z-20 shadow-lg left-0 right-0 top-full origin-top flex flex-col gap-4"
     >
             <MenuLink text="About Us" link="/" />
       <MenuLink text="Features" link="#features"/>

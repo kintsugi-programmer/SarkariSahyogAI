@@ -122,10 +122,10 @@ export default function NewSchemeForm() {
   };
 
   return (
-    <div className="max-w-4xl  mx-auto p-4 sm:p-6 md:p-8  pt-[50vh] ">
+    <div className="max-w-4xl  mx-auto p-4 sm:p-6 md:p-8  sm:pt-[50vh] ">
       <Card className="shadow-xl rounded-xl ">
         <CardContent className="p-6 ">
-          <h2 className="text-2xl font-semibold mb-6 text-center">Post a New Scheme</h2>
+          <h2 className=" mb-6 tmax-w-4xl text-center font-black text-[#155e75] leading-[1.15] text-2xl md:leading-[1.15]">Post a New Scheme</h2>
           <ScrollArea className="h-[75vh] pr-4">
             <form onSubmit={handleSubmit} className="space-y-4">
               {textFields.map(({ name, label }) => (
