@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../../components/theme-provider";
+import Nav from "@/components/ui/Nav";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+          <div className='w-full fixed left-0 z-50'>      <Nav/></div>
         {children}
         </ThemeProvider>
       </body>
