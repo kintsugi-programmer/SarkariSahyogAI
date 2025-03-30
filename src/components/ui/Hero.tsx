@@ -85,7 +85,7 @@ const Copy = () => {
       <p className="mx-auto my-4 max-w-3xl text-center text-base leading-relaxed md:my-6 md:text-xl md:leading-relaxed">
       Quickly find verified government schemes you're eligible for with our intuitive Eligibility Checker & Real-time Guiding Chatbot. Say goodbye to confusion and misinformation.
       </p>
-      <button className="rounded-lg bg-indigo-600 p-3 uppercase text-white transition-colors hover:bg-indigo-700">
+      <button className="rounded-lg bg-[#155e75] p-3 uppercase text-white transition-colors hover:bg-indigo-700">
         <span className="font-bold">Get started - </span> NO SIGN-UP REQUIRED
       </button>
     </>
@@ -110,7 +110,7 @@ const MockupScreen = () => {
         <div className="h-full border-r border-zinc-300 p-2">
           <Logo />
           <div className="mt-3 space-y-1.5">
-            <span className="flex items-center gap-1.5 text-xs text-indigo-600">
+            <span className="flex items-center gap-1.5 text-xs text-[#155e75]">
               <FiMessageCircle />
               <span>Messages</span>
             </span>
@@ -131,7 +131,7 @@ const MockupScreen = () => {
               Search...
             </span>
             <div className="flex items-center gap-1.5 text-xl">
-              <FiBell className="text-indigo-600" />
+              <FiBell className="text-[#155e75]" />
               <FiUser />
             </div>
           </div>
@@ -219,7 +219,7 @@ type TranslateWrapperProps = {
 const LogoItem = ({ Icon, name }: { Icon: IconType; name: string }) => {
   return (
     <span className="flex items-center justify-center gap-4 px-4 py-2 md:py-4">
-      <Icon className="text-2xl text-indigo-600 md:text-3xl" />
+      <Icon className="text-2xl text-[#155e75] md:text-3xl" />
       <span className="whitespace-nowrap text-xl font-semibold uppercase md:text-2xl">
         {name}
       </span>

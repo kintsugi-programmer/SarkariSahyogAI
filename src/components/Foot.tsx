@@ -2,8 +2,8 @@ import React from "react";
 
 const Foot: React.FC = () => {
   return (
-    <footer className="w-full text-emerald-200">
-      <div className="border-t border-emerald-600 bg-emerald-500 pb-12 pt-16 text-sm">
+    <footer className="w-full text-white">
+      <div className="border-t border-[#155e75] bg-[#155e75] pb-12 pt-16 text-sm">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
             <nav className="col-span-2 md:col-span-4 lg:col-span-3">
@@ -73,7 +73,7 @@ const Foot: React.FC = () => {
         </div>
       </div>
 
-      <div className="border-t border-emerald-700 bg-emerald-600 py-4 text-sm">
+      <div className="border-t border-white bg-[#155e75] py-4 text-sm">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div>© {new Date().getFullYear()} Brand</div>

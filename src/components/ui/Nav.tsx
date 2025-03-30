@@ -5,7 +5,7 @@ import { FiMenu, FiArrowRight } from "react-icons/fi";
 
 const Nav = () => {
   return (
-    <div className="bg-gray-50">
+    <div className="bg-[#155e75]">
       <FlipNav />
       
     </div>
@@ -32,7 +32,7 @@ const Logo = () => {
       viewBox="0 0 50 39"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="fill-gray-800"
+      className="fill-[#155e75]"
     >
       <path
         d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z"
@@ -56,12 +56,15 @@ const NavLeft = ({
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="block lg:hidden text-gray-950 text-2xl"
+        className="block lg:hidden text-[#155e75] text-2xl"
         onClick={() => setIsOpen((pv) => !pv)}
       >
         <FiMenu />
       </motion.button>
-      <Logo />
+      <Logo /> 
+      <h1 className="max-w-4xl text-center font-black text-[#155e75] leading-[1.15] text-xl md:leading-[1.15]">
+      SarkariSahyogAI
+      </h1>
       <NavLink text="Solutions" />
       <NavLink text="Community" />
       <NavLink text="Pricing" />
@@ -79,7 +82,7 @@ const NavLink = ({ text }: { text: string }) => {
     >
       <motion.div whileHover={{ y: -30 }}>
         <span className="flex items-center h-[30px] text-gray-500">{text}</span>
-        <span className="flex items-center h-[30px] text-indigo-600">
+        <span className="flex items-center h-[30px] text-[#155e75]">
           {text}
         </span>
       </motion.div>
@@ -93,14 +96,14 @@ const NavRight = () => {
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent font-medium rounded-md whitespace-nowrap"
+        className="px-4 py-2 bg-[#155e75] bg-clip-text text-transparent font-medium rounded-md whitespace-nowrap"
       >
         Sign in
       </motion.button>
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium rounded-md whitespace-nowrap"
+        className="px-4 py-2 bg-[#155e75] text-white font-medium rounded-md whitespace-nowrap"
       >
         Sign up
       </motion.button>
