@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Filling Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        input[type="file"], input[type="text"], textarea {
+            margin: 10px 0;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: left;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Auto Filling Form</h1>
+    <form id="upload-form">
+        <label for="front-image">Upload Front Image:</label>
+        <input type="file" id="front-image" name="front_image" accept="image/*" required><br>
+        <label for="back-image">Upload Back Image:</label>
+        <input type="file" id="back-image" name="back_image" accept="image/*" required><br>
+        <button type="submit">Extract Aadhaar Data</button>
+    </form>
+
+    <form id="data-form" style="display: none; margin-top: 20px;">
+        <h2>Aadhaar Information</h2>
+        <label for="aadhaar-number">Aadhaar Number:</label>
+        <input type="text" id="aadhaar-number" name="aadhaarNumber" ><br>
+        <label for="full-name">Full Name:</label>
+        <input type="text" id="full-name" name="fullName" ><br>
+        <label for="dob">Date of Birth:</label>
+        <input type="text" id="dob" name="dob" ><br>
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="gender" ><br>
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="3" ></textarea><br>
+
+        <!--Optional fields for phone numbers email etc-->
+
+        <label for="phone-number">Phone Number:</label>
+        <input type="text" id="phone-number" name="phoneNumber" ><br>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" ><br>
+
+        <!-- submit button -->
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="result" class="result" style="display: none;"></div>
+
+    <script>
+        const uploadForm = document.getElementById('upload-form');
+        const dataForm = document.getElementById('data-form');
+        const resultDiv = document.getElementById('result');
+
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(uploadForm);
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    // Populate the form with extracted data
+                    document.getElementById('aadhaar-number').value = data.extracted_data['Aadhaar Number'] || '';
+                    document.getElementById('full-name').value = data.extracted_data['Name'] || '';
+                    document.getElementById('dob').value = data.extracted_data['Date of Birth'] || '';
+                    document.getElementById('gender').value = data.extracted_data['Gender'] || '';
+                    document.getElementById('address').value = data.extracted_data['Address'] || '';
+
+                    // Show the data form
+                    dataForm.style.display = 'block';
+                    resultDiv.style.display = 'none';
+                } else {
+                    resultDiv.style.display = 'block';
+                    resultDiv.innerHTML = `<p style="color: red;">Error: ${data.error}</p>`;
+                }
+            } catch (error) {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

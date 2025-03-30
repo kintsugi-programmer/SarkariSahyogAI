@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Scheme Chatbot</title>
+  <style>
+    body { font-family: Arial; margin: 20px; background: #f4f4f4; }
+    #chat, #results { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px #aaa; }
+    #userInput { width: 80%; padding: 10px; font-size: 16px; }
+    #sendBtn { padding: 10px 20px; }
+    .message { margin: 10px 0; }
+    .user { text-align: right; color: #007BFF; }
+    .bot { text-align: left; }
+    .error { color: red; font-style: italic; }
+  </style>
+</head>
+<body>
+  <h2>Smart Government Scheme Chatbot</h2>
+  <div id="chat">
+    <div class="bot message">Tell me about yourself in a sentence or two (age, job, income, location, disability status).</div>
+  </div>
+  <input type="text" id="userInput" placeholder="Type here..." />
+  <button id="sendBtn">Send</button>
+
+  <div id="results" style="margin-top: 20px;"></div>
+
+  <script>
+    const chatDiv = document.getElementById("chat");
+    const resultsDiv = document.getElementById("results");
+    const input = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    let schemes = [];
+
+    async function loadSchemes() {
+      const res = await fetch("/static/schemes.json");
+      schemes = await res.json();
+      schemes.forEach(s => {
+        if (typeof s.income_limit === "string" && s.income_limit.toLowerCase() === "no_limit") {
+          s.income_limit = Infinity;
+        } else {
+          s.income_limit = parseFloat(s.income_limit);
+        }
+      });
+    }
+
+    function appendMessage(text, isUser, isError = false) {
+      const div = document.createElement("div");
+      div.className = isUser ? "message user" : isError ? "message bot error" : "message bot";
+      div.textContent = text;
+      chatDiv.appendChild(div);
+      chatDiv.scrollTop = chatDiv.scrollHeight;
+    }
+
+    let userProfile = {
+      age: null,
+      employment_status: null,
+      location: null,
+      income: null,
+      disability_status: null
+    };
+
+    async function processMessage() {
+      const msg = input.value.trim();
+      if (!msg) return;
+      appendMessage(msg, true);
+      input.value = "";
+
+      appendMessage("Processing your info...", false);
+
+      try {
+        const res = await fetch("/extract", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: msg })
+        });
+
+        const profile = await res.json();
+        if (!profile || profile.error) {
+          appendMessage("Oops! Couldn't extract your info. Please try again with more details.", false, true);
+          return;
+        }
+
+        // Update the user profile with new information
+        Object.keys(userProfile).forEach(key => {
+          if (profile[key] !== null && profile[key] !== undefined) {
+            userProfile[key] = profile[key];
+          }
+        });
+
+        // Identify missing fields
+        const missingFields = Object.keys(userProfile).filter(key => userProfile[key] === null);
+
+        // Handle direct answers for single missing attributes
+        if (missingFields.length === 1) {
+          const missingField = missingFields[0];
+          if (profile[missingField] !== null && profile[missingField] !== undefined) {
+            userProfile[missingField] = profile[missingField];
+            appendMessage("Thank you! I've updated your profile.", false);
+            displayResults(userProfile);
+            return;
+          }
+        }
+
+        if (missingFields.length > 0) {
+          appendMessage(`I need more information: ${missingFields.join(", ")}.`, false);
+        } else {
+          appendMessage("Here's what I understood:", false);
+          appendMessage(JSON.stringify(userProfile, null, 2), false);
+          displayResults(userProfile);
+        }
+      } catch (error) {
+        appendMessage("An error occurred while processing your request. Please try again later.", false, true);
+      }
+    }
+
+    function displayResults(userData) {
+      appendMessage("Here's what I understood:", false);
+      appendMessage(JSON.stringify(userData, null, 2), false);
+
+      const matched = schemes.filter(s => {
+        // Strict attributes: age, location, and disability_status
+        if (userData.age === null || userData.age < s.min_age || userData.age > s.max_age) return false;
+        if (userData.location && s.location.toLowerCase() !== "national" && s.location.toLowerCase() !== userData.location.toLowerCase()) return false;
+        if (userData.disability_status && s.disability_status !== "any" && s.disability_status !== userData.disability_status) return false;
+
+        // Relaxed attributes: employment_status and income
+        let score = 0;
+        if (userData.employment_status && (s.employment_status === userData.employment_status || s.employment_status === "any")) score++;
+        if (userData.income !== null && s.income_limit >= userData.income) score++;
+
+        return score >= 1; // At least 1 relaxed attribute must match
+      });
+
+      resultsDiv.innerHTML = "<h3>Matching Schemes:</h3>";
+      if (matched.length === 0) {
+        resultsDiv.innerHTML += "<p>No matching schemes found.</p>";
+      } else {
+        matched.forEach(s => {
+          resultsDiv.innerHTML += `
+            <div>
+              <strong>${s.scheme_name}</strong><br/>
+              Benefits: ${s.benefits}<br/>
+              Eligibility: Age ${s.min_age}-${s.max_age}, ${s.employment_status}<br/>
+              Location: ${s.location}, Income ≤ ${s.income_limit === Infinity ? 'No Limit' : 'INR ' + s.income_limit}<br/><br/>
+            </div>
+          `;
+        });
+      }
+    }
+
+    sendBtn.addEventListener("click", processMessage);
+    input.addEventListener("keydown", e => { if (e.key === "Enter") processMessage(); });
+
+    loadSchemes();
+  </script>
+</body>
+</html>
