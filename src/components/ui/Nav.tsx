@@ -62,13 +62,12 @@ const NavLeft = ({
         <FiMenu />
       </motion.button>
       <Logo /> 
-      <h1 className="max-w-4xl text-center font-black text-[#155e75] leading-[1.15] text-xl md:leading-[1.15]">
+      <h1 className="max-w-4xl text-center font-black text-[#155e75] leading-[1.15] text-2xl md:leading-[1.15]">
       SarkariSahyogAI
       </h1>
-      <NavLink text="Solutions" />
-      <NavLink text="Community" />
-      <NavLink text="Pricing" />
-      <NavLink text="Company" />
+      <NavLink text="About Us" />
+      <NavLink text="Features" />
+      <NavLink text="Guide" />
     </div>
   );
 };
@@ -98,14 +97,14 @@ const NavRight = () => {
         whileTap={{ scale: 0.95 }}
         className="px-4 py-2 bg-[#155e75] bg-clip-text text-transparent font-medium rounded-md whitespace-nowrap"
       >
-        Sign in
+        Reach Out
       </motion.button>
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="px-4 py-2 bg-[#155e75] text-white font-medium rounded-md whitespace-nowrap"
       >
-        Sign up
+        GET STARTED
       </motion.button>
     </div>
   );
