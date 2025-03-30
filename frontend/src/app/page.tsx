@@ -1,11 +1,16 @@
 import Image from "next/image";
 import { Hero } from "@/components/ui/Hero";
-import { Steps } from "@/components/ui/Steps";
+import { Steps } from "@/components/Steps";
+import { Features } from "@/components/Features";
+import Foot from "@/components/Foot";
 export default function Home() {
   return (
     <div>
       <section id="hero"><Hero/></section>
       <section id="steps"><Steps/></section>
+      <section id="steps"><Steps/></section>
+      <section id="features"><Features/></section>
+      <section id="foot"><Foot/></section>
 
     {/* <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
