@@ -8,7 +8,6 @@ export default function Home() {
     <div>
       <section id="hero"><Hero/></section>
       <section id="steps"><Steps/></section>
-      <section id="steps"><Steps/></section>
       <section id="features"><Features/></section>
       <section id="foot"><Foot/></section>
 
