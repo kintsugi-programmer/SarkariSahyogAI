@@ -5,10 +5,10 @@ import React, { useRef } from "react";
 import { IconType } from "react-icons";
 import {
   FiArrowRight,
-  FiAward,
-  FiCalendar,
-  FiCopy,
-  FiDatabase,
+  FiUser,
+  FiSearch,
+  FiCheckCircle,
+  FiMessageCircle,
 } from "react-icons/fi";
 
 export const Steps = () => {
@@ -30,7 +30,6 @@ export const Steps = () => {
           />
         ))}
       </div>
-      
     </>
   );
 };
@@ -45,15 +44,13 @@ const Card = ({ position, card, scrollYProgress }: CardProps) => {
   const scaleFromPct = (position - 1) / CARDS.length;
   const y = useTransform(scrollYProgress, [scaleFromPct, 1], [0, -CARD_HEIGHT]);
 
-  const isOddCard = position % 2;
-
   return (
     <motion.div
       style={{
         height: CARD_HEIGHT,
         y: position === CARDS.length ? undefined : y,
-        background: isOddCard ? "white" : "black",
-        color: isOddCard ? "black" : "white",
+        background: card.bgColor,
+        color: card.textColor,
       }}
       className="sticky top-0 flex w-full origin-top flex-col items-center justify-center px-4"
     >
@@ -66,13 +63,9 @@ const Card = ({ position, card, scrollYProgress }: CardProps) => {
       </p>
       <a
         href={card.routeTo}
-        className={`flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase text-black transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg ${
+        className={`flex items-center gap-2 rounded px-6 py-4 text-base font-medium uppercase transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 md:text-lg ${
           card.ctaClasses
-        } ${
-          isOddCard
-            ? "shadow-[4px_4px_0px_white] hover:shadow-[8px_8px_0px_white]"
-            : "shadow-[4px_4px_0px_black] hover:shadow-[8px_8px_0px_black]"
-        }`}
+        } shadow-[4px_4px_0px_${card.shadowColor}] hover:shadow-[8px_8px_0px_${card.shadowColor}]`}
       >
         <span>Learn more</span>
         <FiArrowRight />
@@ -90,44 +83,58 @@ type CardType = {
   description: string;
   ctaClasses: string;
   routeTo: string;
+  bgColor: string;
+  textColor: string;
+  shadowColor: string;
 };
 
 const CARDS: CardType[] = [
-    {
-        id: 1,
-        Icon: FiDatabase,
-        title: "#1 in data privacy",
-        description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!",
-        ctaClasses: "bg-pink-300",
-        routeTo: "#",
-      },
+  {
+    id: 1,
+    Icon: FiUser,
+    title: "Enter Your Details",
+    description:
+      "Start by entering basic details about yourself, such as age, location, and employment status.",
+    ctaClasses: "bg-cyan-800 text-white",
+    routeTo: "#",
+    bgColor: "white",
+    textColor: "#0f172a",
+    shadowColor: "#0f172a",
+  },
   {
     id: 2,
-    Icon: FiCalendar,
-    title: "A new type of Calendar",
+    Icon: FiSearch,
+    title: "Find Relevant Schemes",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!",
-    ctaClasses: "bg-violet-300",
+      "Our system searches and quickly identifies government schemes that match your eligibility.",
+    ctaClasses: "bg-white text-cyan-800",
     routeTo: "#",
+    bgColor: "#155e75",
+    textColor: "white",
+    shadowColor: "white",
   },
-  
   {
     id: 3,
-    Icon: FiCopy,
-    title: "Use your existing tools",
+    Icon: FiCheckCircle,
+    title: "Select & Apply",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!",
-    ctaClasses: "bg-red-300",
+      "Choose the best-suited scheme from the curated list and easily apply through official channels.",
+    ctaClasses: "bg-cyan-800 text-white",
     routeTo: "#",
+    bgColor: "#fdba74",
+    textColor: "#0f172a",
+    shadowColor: "#0f172a",
   },
   {
     id: 4,
-    Icon: FiAward,
-    title: "Customers love us",
+    Icon: FiMessageCircle,
+    title: "Get AI Assistance",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi illo officia atque iure voluptatibus necessitatibus odit cupiditate reprehenderit iusto quaerat!",
-    ctaClasses: "bg-amber-300",
+      "Use our AI-powered chatbot to clarify doubts and get real-time guidance throughout the process.",
+    ctaClasses: "bg-white text-cyan-800",
     routeTo: "#",
+    bgColor: "#155e75",
+    textColor: "white",
+    shadowColor: "white",
   },
 ];
