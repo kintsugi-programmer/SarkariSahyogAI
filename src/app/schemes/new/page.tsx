@@ -32,26 +32,27 @@ export default function NewSchemeForm() {
     application_process: '',
     documents_required: '',
     scheme_apply_date: '',
-    scheme_status: 'open',
+    scheme_status: '', // was 'open'
     eligible_state: '',
-    eligible_gender: 'all',
-    eligible_age_range: '0-10',
-    eligible_caste: 'all',
+    eligible_gender: '', // was 'all'
+    eligible_age_range: '',
+    eligible_caste: '',
     ministry_name: '',
-    eligible_residence: 'both',
-    is_minority_eligible: 'no',
-    is_differently_abled_eligible: 'no',
+    eligible_residence: '',
+    is_minority_eligible: '',
+    is_differently_abled_eligible: '',
     benefit_type: '',
-    is_dbt_scheme: 'no',
-    eligible_marital_status: 'all',
-    eligible_disability_percentage: '0-10',
-    is_below_poverty_line: 'no',
-    is_economic_distress: 'no',
-    employment_status: 'all',
-    eligible_occupation: 'All',
-    application_mode: 'Online',
+    is_dbt_scheme: '',
+    eligible_marital_status: '',
+    eligible_disability_percentage: '',
+    is_below_poverty_line: '',
+    is_economic_distress: '', // was 'no'
+    employment_status: '',    // was 'all'
+    eligible_occupation: '',
+    application_mode: '',
     scheme_type: '',
   });
+  
 
   const handleChange = (e: React.ChangeEvent<any>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -111,7 +112,7 @@ export default function NewSchemeForm() {
     benefit_type: ['Cash', 'Composite', 'In Kind'],
     is_dbt_scheme: ['yes', 'no'],
     eligible_marital_status: ['all', 'widowed', 'divorced', 'separated', 'married', 'never married'],
-    eligible_disability_percentage: ['0-10', '11-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', '81-90', '91-100'],
+    eligible_disability_percentage: ['0','0-10', '11-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', '81-90', '91-100'],
     is_below_poverty_line: ['yes', 'no'],
     is_economic_distress: ['yes', 'no'],
     employment_status: ['all', 'employed', 'unemployed', 'student', 'self-employed', 'freelancer', 'retired', 'homemaker', 'daily wage worker', 'contractual worker', 'gig worker'],
@@ -135,22 +136,28 @@ export default function NewSchemeForm() {
                 </div>
               ))}
 
-              {Object.entries(enums).map(([key, values]) => (
-                <div key={key}>
-                  <Label htmlFor={key}>{key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</Label>
-                  <select
-                    id={key}
-                    name={key}
-                    className="w-full border rounded  p-2"
-                    onChange={handleChange}
-                    value={form[key as keyof typeof form]}
-                  >
-                    {values.map((v) => (
-                      <option key={v} value={v}>{v}</option>
-                    ))}
-                  </select>
-                </div>
-              ))}
+{Object.entries(enums).map(([key, values]) => (
+  <div key={key}>
+    <Label htmlFor={key}>
+      {key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+    </Label>
+    <select
+      id={key}
+      name={key}
+      className="w-full border rounded p-2"
+      onChange={handleChange}
+      value={form[key as keyof typeof form] || ''}
+    >
+      <option value="" disabled>
+        -- Select {key.replace(/_/g, ' ')} --
+      </option>
+      {values.map((v) => (
+        <option key={v} value={v}>{v}</option>
+      ))}
+    </select>
+  </div>
+))}
+
 
 
               <Button type="submit" className="w-full rounded-lg bg-[#155e75] p-3 uppercase text-white transition-colors hover:bg-cyan-950 " disabled={loading}>
