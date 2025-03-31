@@ -16,10 +16,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Missing GEMINI_API_KEY' }, { status: 500 });
   }
 
+  if (!message || message.trim() === '') {
+    return NextResponse.json({
+      answer:
+        '👋 Welcome to Sarkari Sahayog AI! Please tell me about yourself (e.g. age, gender, caste, location, employment, disability, etc.), and I’ll find relevant government schemes for you.'
+    });
+  }
+
   await connectToDatabase();
   const ai = new GoogleGenAI({ apiKey });
 
-  // 🧠 Step 1: Extract profile from natural language
   const extractionPrompt = `
 You are an AI assistant. Given a natural language input, extract a structured profile.
 
@@ -54,7 +60,6 @@ Input: "${message}"
       return NextResponse.json({ error: 'Could not parse Gemini profile output' }, { status: 400 });
     }
 
-    // 🧩 Step 2: Map profile into MongoDB query
     const filters: any[] = [];
 
     if (profile.gender)
@@ -81,7 +86,6 @@ Input: "${message}"
     if (profile.location)
       filters.push({ eligible_state: profile.location });
 
-    // 🔢 Map age to age_range
     if (profile.age && typeof profile.age === 'number') {
       const ageRanges = [
         '0-10', '11-20', '21-30', '31-40', '41-50',
@@ -98,7 +102,6 @@ Input: "${message}"
 
     const query = filters.length > 0 ? { $and: filters } : {};
 
-    // 🧠 Step 3: Query and return schemes
     const schemes = await Scheme.find(query).limit(5);
 
     if (!schemes.length) {
