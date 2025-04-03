@@ -105,16 +105,6 @@ npm run dev
 
 ---
 
-## 📌 To-Do / Roadmap
-
-- [ ] Add multi-language support (Hindi, Bengali, etc.)
-- [ ] Integrate ML model for predictive eligibility
-- [ ] Scheme bookmarking and sharing
-- [ ] Admin dashboard for scheme management
-- [ ] Visual analytics on scheme coverage
-
----
-
 ## 🤝 Contributing
 
 Pull requests and feedback are welcome! For major changes, please open an issue first to discuss what you'd like to change.
