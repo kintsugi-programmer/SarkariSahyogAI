@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "../../components/theme-provider";
 import Foot from "@/components/Foot";
 import Nav from "@/components/ui/Nav";
+import FloatingAIButton from "@/components/ui/Chat";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({
                 <Nav/>
                 
         {children}
+        <FloatingAIButton/>
         <section id="foot"><Foot/></section>
         </ThemeProvider>
       </body>

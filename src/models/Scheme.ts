@@ -74,6 +74,7 @@ const schemeSchema = new Schema<IScheme>(
     eligible_state: {
       type: String,
       enum: [
+        'All',
         'Andaman and Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar',
         'Chandigarh', 'Chhattisgarh', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh',
         'Jammu and Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 'Ladakh', 'Lakshadweep',
@@ -92,7 +93,7 @@ const schemeSchema = new Schema<IScheme>(
     eligible_age_range: {
       type: String,
       enum: [
-        '0-10', '11-20', '21-30', '31-40', '41-50', '51-60',
+        'All','0-10', '11-20', '21-30', '31-40', '41-50', '51-60',
         '61-70', '71-80', '81-90', '91-100', '100+',
       ],
       default: '0-10',
@@ -188,10 +189,10 @@ const schemeSchema = new Schema<IScheme>(
     eligible_disability_percentage: {
       type: String,
       enum: [
-        '0','0-10', '11-20', '21-30', '31-40', '41-50',
+        'All','0','0-10', '11-20', '21-30', '31-40', '41-50',
         '51-60', '61-70', '71-80', '81-90', '91-100',
       ],
-      default: '0-10',
+      default: '0',
     },
     is_below_poverty_line: {
       type: String,
@@ -224,12 +225,12 @@ const schemeSchema = new Schema<IScheme>(
     },
     application_mode: {
       type: String,
-      enum: ['Online', 'Offline', 'Online - via CSCs'],
+      enum: ['All','Online', 'Offline', 'Online - via CSCs'],
       default: 'Online',
     },
     scheme_type: {
       type: String,
-      enum: ['Central Sector Scheme', 'Centrally Sponsored Scheme'],
+      enum: ['All','Central Sector Scheme', 'Centrally Sponsored Scheme'],
       required: true,
     },
   },

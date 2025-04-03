@@ -62,14 +62,19 @@ const NavLeft = ({
         <FiMenu />
       </motion.button>
       {/* <Logo />  */}
+      <a href="/">
       <h1 className="max-w-4xl sm:block hidden text-center font-black text-[#155e75] leading-[1.15] text-2xl md:leading-[1.15]">
       SarkariSahyogAI
       </h1>      <h1 className="max-w-4xl block sm:hidden text-center font-black text-[#155e75] leading-[1.15] text-2xl md:leading-[1.15]">
       SSAI
-      </h1>
+      </h1></a>
+ 
       <NavLink text="About Us" link="/" />
       <NavLink text="Features" link="#features"/>
       <NavLink text="Guide" link="#steps"/>
+      <NavLink text="Eligibility Checker" link="/eligibility-checker" />
+      <NavLink text="Contribute Data" link="/schemes/new" />
+      <NavLink text="AI Chatbot" link="/chat" />
     </div>
   );
 };
@@ -102,13 +107,14 @@ const NavRight = () => {
       >
         Reach Out
       </motion.button></a>
+      <a href="/chat">
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="px-4 py-2 bg-[#155e75] text-white font-medium rounded-md whitespace-nowrap"
       >
         GET STARTED
-      </motion.button>
+      </motion.button></a>
     </div>
   );
 };
@@ -124,6 +130,9 @@ const NavMenu = ({ isOpen }: { isOpen: boolean }) => {
             <MenuLink text="About Us" link="/" />
       <MenuLink text="Features" link="#features"/>
       <MenuLink text="Guide" link="#steps"/>
+      <MenuLink text="Eligibility Checker" link="/eligibility-checker" />
+      <MenuLink text="Contribute Data" link="/schemes/new" />
+      <MenuLink text="AI Chatbot" link="/chat" />
 
     </motion.div>
   );

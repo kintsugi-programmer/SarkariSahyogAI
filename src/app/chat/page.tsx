@@ -60,13 +60,13 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className="max-w-2xl h-auto mx-auto p-6">
       <Card>
         <CardContent className="space-y-4 p-6">
           <h2 className="text-xl font-bold text-[#155e75]">Sarkari Sahayog AI 🤖</h2>
 
           <div
-            className="min-h-[200px] max-h-[400px] overflow-y-auto space-y-3 border p-3 rounded-md bg-gray-50"
+            className="min-h-[200px] max-h-[500px] overflow-y-auto space-y-3 border p-3 rounded-md bg-gray-50"
             ref={containerRef}
           >
             {messages.map((msg, i) => (
