@@ -35,7 +35,7 @@ export const Hero = () => {
   return (
     <section className="pb-5 bg-white">
       {/* overflow-hidden */}
-      <div className="relative flex flex-col items-center justify-center px-12 pb-48 pt-40">
+      <div className="relative flex flex-col items-center justify-center px-12 sm:pb-90 pb-58 pt-15">
         <Copy />
         <MockupScreen />
       </div>
@@ -49,7 +49,7 @@ const Copy = () => {
     <><div className="flex sm:flex-row flex-col sm:space-x-4 space-x-0 space-y-4 sm:space-y-0">
       <div className="mb-1.5 rounded-full bg-zinc-600">
         <a
-          href="#"
+          href="https://github.com/kintsugi-programmer/SarkariSahyogAI"
           target="_blank"
           rel="nofollow"
           className="flex origin-top-left items-center rounded-full border border-zinc-900 bg-white p-0.5 text-sm transition-transform hover:-rotate-2"
@@ -63,9 +63,10 @@ const Copy = () => {
           <FiArrowUpRight className="mr-2 inline-block" />
         </a>
         
-      </div><div className="mb-1.5 rounded-full bg-zinc-600">
+      </div>
+      <div className="mb-1.5 rounded-full bg-zinc-600">
         <a
-          href="#"
+          href="https://github.com/kintsugi-programmer/SarkariSahyogAI"
           target="_blank"
           rel="nofollow"
           className="flex origin-top-left items-center rounded-full border border-zinc-900 bg-white p-0.5 text-sm transition-transform hover:-rotate-2"
@@ -96,7 +97,7 @@ const Copy = () => {
 
 const MockupScreen = () => {
   return (
-    <div className="absolute bottom-0 left-1/2 h-36 w-[calc(100vw_-_56px)] max-w-[1100px] -translate-x-1/2 overflow-hidden rounded-t-xl bg-zinc-900 p-0.5">
+    <div className="absolute bottom-0 left-1/2 sm:h-80 h-50 w-[calc(100vw_-_56px)] max-w-[1100px] -translate-x-1/2 overflow-hidden rounded-t-xl bg-zinc-900 p-0.5">
       <div className="flex items-center justify-between px-2 py-1">
         <div className="flex items-center gap-0.5">
           <span className="size-2 rounded-full bg-red-400" />
