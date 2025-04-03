@@ -75,7 +75,7 @@ const Copy = () => {
             AND!
           </span>
           <span className="ml-1.5 mr-1 inline-block">
-            We're are Opensource!
+            We're Opensource!
           </span>
           <FiArrowUpRight className="mr-2 inline-block" />
         </a>
