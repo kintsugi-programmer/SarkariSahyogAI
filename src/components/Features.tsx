@@ -20,7 +20,7 @@ export const HoverEffect = ({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10",
+        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-10",
         className
       )}
     >
@@ -108,7 +108,7 @@ export const CardDescription = ({
 export function Features() {
   return (
     <div className="max-w-5xl mx-auto px-8">
-      <div className="mb-6 text-center text-4xl font-semibold md:text-6xl pt-5">
+      <div className="mb-2 text-center text-4xl font-semibold md:text-6xl pt-8">
         Why Choose Us
       </div>
       <HoverEffect items={featuresList} />
