@@ -231,17 +231,28 @@ Example of expected output:
     const schemes = await Scheme.find(query).limit(10).select('scheme_name link_to_apply benefits eligibility_criteria -_id').lean();
     console.log(`Found ${schemes.length} matching schemes.`);
 
-    // --- Format Final Answer ---
-    const answer = schemes.length
-      ? schemes.map(s => `• Scheme: ${s.scheme_name}
-  ↳ Link: ${s.link_to_apply || 'Not available'}
-  ↳ Benefits: ${s.benefits || 'Details not specified'}
-  ↳ Eligibility Notes: ${s.eligibility_criteria || 'General eligibility applies'}`)
-        .join('\n\n')
-      : 'Based on the extracted details, no specific schemes were found matching all criteria. General government schemes may still apply.';
 
-    // --- Return Success Response ---
-    return NextResponse.json({ profile, answer });
+
+     // --- Format Final Answer with Clickable Links ---
+     const answer = schemes.length
+     ? schemes.map(s => {
+         const link = s.link_to_apply ? `<a href="${s.link_to_apply}" target="_blank" rel="noopener noreferrer">Apply Here</a>` : 'Not available';
+         return `• Scheme: ${s.scheme_name}<br>
+ ↳ Link: ${link}<br>
+ ↳ Benefits: ${s.benefits || 'Details not specified'}<br>
+ ↳ Eligibility Notes: ${s.eligibility_criteria || 'General eligibility applies'}`;
+       })
+       .join('<br><br>') // Use <br><br> for line breaks in HTML
+     : 'Based on the extracted details, no specific schemes were found matching all criteria. General government schemes may still apply.';
+
+
+     // --- Return Success Response with HTML ---
+     return new NextResponse(JSON.stringify({ profile, answer }), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json', // Keep the content type as JSON
+      },
+    });
 
   } catch (err: any) {
     // --- General Error Handling ---

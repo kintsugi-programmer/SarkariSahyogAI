@@ -11,6 +11,11 @@ interface ChatMessage {
   content: string;
 }
 
+// Function to render HTML safely
+const renderHTML = (html: string) => {
+  return { __html: html };
+};
+
 export default function ChatPage() {
   const [query, setQuery] = useState('');
   const [frontFile, setFrontFile] = useState<File | null>(null);
@@ -91,7 +96,13 @@ export default function ChatPage() {
                     : 'bg-[#d1e7dd] text-black text-right'
                 }`}
               >
-                {msg.role === 'bot' ? `🤖 ${msg.content}` : `🧑 ${msg.content}`}
+                {msg.role === 'bot' ? (
+                  <>
+                    🤖 <span dangerouslySetInnerHTML={renderHTML(msg.content)} />
+                  </>
+                ) : (
+                  `🧑 ${msg.content}`
+                )}
               </div>
             ))}
           </div>

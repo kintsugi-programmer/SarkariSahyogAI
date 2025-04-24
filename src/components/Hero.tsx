@@ -87,7 +87,7 @@ const Copy = () => {
       <p className="mx-auto my-4 max-w-3xl text-center text-base leading-relaxed md:my-6 md:text-xl md:leading-relaxed">
       Quickly find verified government schemes you're eligible for with our intuitive Eligibility Checker & Real-time Guiding Chatbot. Say goodbye to confusion and misinformation.
       </p>
-      <Link href='/schemes/new'>
+      <Link href='/chat'>
       <button className="rounded-lg bg-[#155e75] p-3 uppercase text-white transition-colors hover:bg-cyan-950">
         <span className="font-bold">Get started - </span> NO SIGN-UP REQUIRED
       </button></Link>

@@ -102,25 +102,30 @@ Input: "${message}"
 
     const query = filters.length > 0 ? { $and: filters } : {};
 
-    const schemes = await Scheme.find(query).limit(5);
+    const schemes = await Scheme.find(query).limit(5).lean(); // Use .lean() for faster reads
 
     if (!schemes.length) {
       return NextResponse.json({ answer: 'No schemes found for your profile.' });
     }
 
     const formatted = schemes.map(s => `
-• ${s.scheme_name}
-  ↳ Link: ${s.link_to_apply}
-  ↳ Benefits: ${s.benefits || 'No details'}
-  ↳ Eligibility: ${s.eligibility_criteria || 'Not specified'}
-  ↳ Category: ${s.category}
-  ↳ Application Mode: ${s.application_mode || 'N/A'}
+• ${s.scheme_name}<br>
+  ↳ Link: <a href="${s.link_to_apply}" target="_blank" rel="noopener noreferrer">Apply Here</a><br>
+  ↳ Benefits: ${s.benefits ? s.benefits.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>') : 'No details'}<br>
+  ↳ Eligibility: ${s.eligibility_criteria || 'Not specified'}<br>
+  ↳ Category: ${s.category}<br>
+  ↳ Application Mode: ${s.application_mode || 'N/A'}<br>
   ↳ Status: ${s.scheme_status || 'open'}
-`).join('\n');
+`).join('<br><br>');
 
-    return NextResponse.json({
-      answer: `Here are some schemes you may be eligible for:\n\n${formatted}`,
+    return new NextResponse(JSON.stringify({
+      answer: `Here are some schemes you may be eligible for:<br><br>${formatted}`,
       profile,
+    }), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
 
   } catch (error: any) {
