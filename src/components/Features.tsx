@@ -130,9 +130,9 @@ export const featuresList = [
     link: "#",
   },
   {
-    title: "Multilingual Support",
+    title: "OCR Support",
     description:
-      "Accessible in multiple regional languages, ensuring inclusive usage for everyone.",
+      "Accessible in with AI OCR RAG Model, ensuring inclusive usage for everyone.",
     link: "#",
   },
   {
