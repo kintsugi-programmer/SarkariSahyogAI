@@ -3,77 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto-Filling Form</title>
+    <title>Sarkari Sahyog AI - Ayushman Bharat Application</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             text-align: center;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        h1, h2 {
+            color: #0d47a1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        h1 {
+            margin-top: 30px;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            font-size: 1.7rem;
+            margin-bottom: 25px;
         }
         input[type="file"], input[type="text"], textarea {
             margin: 10px 0;
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 12px;
+            border: 1px solid #c4c4c4;
+            border-radius: 6px;
             box-sizing: border-box;
+            background-color: #ffffff;
+            color: #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        input[type="file"] {
+            padding: 10px;
+            background-color: #ffffff;
+        }
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #1e88e5;
+            border-color: #1e88e5;
         }
         button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
+            padding: 12px 24px;
+            background-color: #0d47a1;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-top: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #1565c0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+        .info {
+            text-align: left;
+            margin: 25px 0;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .info p {
+            margin: 10px 0;
+            font-size: 1.05rem;
+        }
+        .info strong {
+            color: #0d47a1;
         }
         .result {
-            margin-top: 20px;
+            margin-top: 25px;
             text-align: left;
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #1976d2;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        a:hover {
+            color: #0d47a1;
+            text-decoration: underline;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin-top: 15px;
+            color: #0d47a1;
+            font-weight: 600;
+        }
+        form {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
         }
     </style>
 </head>
 <body>
-    <h1>Auto Filling Form</h1>
+    <h1>Sarkari Sahyog AI</h1>
+    <h2>Ayushman Bharat - PM-JAY Application</h2>
+    <div class="info">
+        <p><strong>Benefits:</strong> ₹5 lakh health coverage per family per year.</p>
+        <p><strong>Eligibility:</strong> Based on Socio-Economic Caste Census (SECC) data.</p>
+        <p><strong>Category:</strong> Health & Wellness</p>
+        <p><strong>Application Mode:</strong> Offline & Online</p>
+        <p><strong>Status:</strong> Open</p>
+    </div>
+
     <form id="upload-form">
-        <label for="front-image">Upload Front Image:</label>
+        <label for="front-image">Upload Aadhaar Front Image:</label>
         <input type="file" id="front-image" name="front_image" accept="image/*" required><br>
-        <label for="back-image">Upload Back Image:</label>
+        <label for="back-image">Upload Aadhaar Back Image:</label>
         <input type="file" id="back-image" name="back_image" accept="image/*" required><br>
         <button type="submit">Extract Aadhaar Data</button>
     </form>
 
     <form id="data-form" style="display: none; margin-top: 20px;">
-        <h2>Aadhaar Information</h2>
+        <h2>Ayushman Bharat Application Form</h2>
         <label for="aadhaar-number">Aadhaar Number:</label>
-        <input type="text" id="aadhaar-number" name="aadhaarNumber" ><br>
+        <input type="text" id="aadhaar-number" name="aadhaarNumber" required><br>
         <label for="full-name">Full Name:</label>
-        <input type="text" id="full-name" name="fullName" ><br>
+        <input type="text" id="full-name" name="fullName" required><br>
         <label for="dob">Date of Birth:</label>
-        <input type="text" id="dob" name="dob" ><br>
+        <input type="text" id="dob" name="dob" required><br>
         <label for="gender">Gender:</label>
-        <input type="text" id="gender" name="gender" ><br>
+        <input type="text" id="gender" name="gender" required><br>
         <label for="address">Address:</label>
-        <textarea id="address" name="address" rows="3" ></textarea><br>
-
-        <!--Optional fields for phone numbers email etc-->
-
-        <label for="phone-number">Phone Number:</label>
-        <input type="text" id="phone-number" name="phoneNumber" ><br>
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" ><br>
-
-        <!-- submit button -->
-
-        <button type="submit">Submit</button>
+        <textarea id="address" name="address" rows="3" required></textarea><br>
+        <button type="submit">Submit Application</button>
     </form>
 
     <div id="result" class="result" style="display: none;"></div>

@@ -14,7 +14,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Configure Gemini Generative AI
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+genai.configure(api_key="AIzaSyC05dOo51w_MBUM6f3oH9Lvo-MeSbnzTRE")
 
 @app.route('/')
 def index():
@@ -112,6 +112,12 @@ def upload():
         if os.path.exists(back_path):
             os.remove(back_path)
         return jsonify({'error': f"An unexpected error occurred: {str(e)}"}), 500
+
+@app.route('/submit', methods=['POST'])
+def submit_application():
+    data = request.json
+    # Process the submitted application data (e.g., save to database or send to API)
+    return jsonify({'message': 'Application submitted successfully!'})
 
 if __name__ == '__main__':
     app.run(debug=True)
