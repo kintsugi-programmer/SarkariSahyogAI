@@ -136,9 +136,9 @@ export const featuresList = [
     link: "#",
   },
   {
-    title: "Transparent & Verified Info",
+    title: "Decentralized Transparent Info",
     description:
-      "All scheme details are verified, transparent, and regularly updated to keep you informed and secure.",
+      "All scheme details are Decentralized, transparent, and regularly updated to keep you informed and secure.",
     link: "#",
   },
   {
